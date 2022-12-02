@@ -13,6 +13,7 @@ const stateInicial = {
   // hasTrunfo:false,
   cardTrunfo: false,
   isSaveButtonDisabled: true,
+  onSaveButtonClick: [],
 };
 
 class App extends React.Component {
@@ -53,6 +54,29 @@ class App extends React.Component {
     }, this.validateInfo);
   };
 
+  onSaveButtonClick = (e) => {
+    e.preventDefault();
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+    } = this.state;
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardImage,
+    };
+    this.setState(({ onSaveButtonClick }) => ({
+      onSaveButtonClick: [...onSaveButtonClick, newCard],
+    }));
+    this.setState({ ...stateInicial });
+    this.setState({
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+    });
+  };
+
   render() {
     const {
       cardName,
@@ -67,7 +91,11 @@ class App extends React.Component {
     return (
       <div>
         <h1>Tryunfo</h1>
-        <Form { ...this.state } onInputChange={ this.onInputChange } />
+        <Form
+          { ...this.state }
+          onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
+        />
         <Card
           cardName={ cardName }
           cardImage={ cardImage }
@@ -79,6 +107,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           onInputChange={ this.onInputChange }
         />
+
       </div>
     );
   }
