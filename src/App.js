@@ -20,11 +20,37 @@ class App extends React.Component {
     ...stateInicial,
   };
 
+  validateInfo = () => {
+    const {
+      cardName,
+      cardImage,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
+    const limit = 90;
+    const power = 210;
+    const nome = cardName.length > 0;
+    const img = cardImage.length > 0;
+    const description = cardDescription.length > 0;
+    const card1 = Number(cardAttr1) >= 0 && Number(cardAttr1) <= limit;
+    const card2 = Number(cardAttr2) >= 0 && Number(cardAttr2) <= limit;
+    const card3 = Number(cardAttr3) >= 0 && Number(cardAttr3) <= limit;
+    const sum = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    const total = sum <= power;
+
+    this.setState({
+      isSaveButtonDisabled: !(
+        nome && img && description && card1 && card2 && card3 && total),
+    });
+  };
+
   onInputChange = ({ target }) => {
     const { value, name, type, checked } = target;
     this.setState({
       [name]: type === 'checked' ? checked : value,
-    });
+    }, this.validateInfo);
   };
 
   render() {
