@@ -43,16 +43,26 @@ class App extends React.Component {
 
     this.setState({
       isSaveButtonDisabled: !(
-        nome && img && description && card1 && card2 && card3 && total),
+        nome
+        && img
+        && description
+        && card1
+        && card2
+        && card3
+        && total
+      ),
     });
   };
 
   onInputChange = ({ target }) => {
     const { value, name, checked } = target;
-    const newCard = (name === 'cardTrunfo' ? checked : value);
-    this.setState({
-      [name]: newCard,
-    }, this.validateInfo);
+    const newCard = name === 'cardTrunfo' ? checked : value;
+    this.setState(
+      {
+        [name]: newCard,
+      },
+      this.validateInfo,
+    );
   };
 
   onSaveButtonClick = (e) => {
@@ -85,29 +95,32 @@ class App extends React.Component {
     //   });
     // }
 
-    this.setState((prevState) => ({
-      onSaveButtonClick: [...prevState.onSaveButtonClick, newCard],
-    }), () => {
-      const { onSaveButtonClick } = this.state;
-      onSaveButtonClick.some((element) => (
-        element.cardTrunfo === true ? this.setState({ hasTrunfo: true })
-          : (this.setState({ hasTrunfo: false }))
-      ));
-    });
+    this.setState(
+      (prevState) => ({
+        onSaveButtonClick: [...prevState.onSaveButtonClick, newCard],
+      }),
+      () => {
+        const { onSaveButtonClick } = this.state;
+        onSaveButtonClick.some((element) => (element.cardTrunfo === true
+          ? this.setState({ hasTrunfo: true })
+          : this.setState({ hasTrunfo: false })));
+      },
+    );
     this.setState({ ...stateInicial });
   };
 
   render() {
     // const {
-    //   cardName,
-    //   cardDescription,
-    //   cardAttr1,
-    //   cardAttr2,
-    //   cardAttr3,
-    //   cardImage,
-    //   cardRare,
-    //   cardTrunfo,
+    //   // cardName,
+    //   // cardDescription,
+    //   // cardAttr1,
+    //   // cardAttr2,
+    //   // cardAttr3,
+    //   // cardImage,
+    //   // cardRare,
+    //   // cardTrunfo,
     // } = this.state;
+    const { onSaveButtonClick } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -129,6 +142,30 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
         />
 
+        {onSaveButtonClick.map(
+          ({
+            cardName,
+            cardDescription,
+            cardAttr1,
+            cardAttr2,
+            cardAttr3,
+            cardImage,
+            cardRare,
+            cardTrunfo,
+          }) => (
+            <Card
+              key={ cardName }
+              cardName={ cardName }
+              cardImage={ cardImage }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          ),
+        )}
       </div>
     );
   }
