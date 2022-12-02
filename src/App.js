@@ -54,8 +54,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
         />
       </div>
-    );;
-
+    );
   }
 }
 
