@@ -78,6 +78,12 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
     } = this.state;
+    if (cardTrunfo === true) {
+      this.setState({
+        hasTrunfo: true,
+        cardTrunfo: false,
+      });
+    }
     const newCard = {
       cardName,
       cardDescription,
@@ -89,37 +95,34 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
     };
-    // if (this.onSaveButtonClick.some((element) => element.cardTrunfo)) {
-    //   this.setState({
-    //     hasTrunfo: true,
-    //   });
-    // }
 
     this.setState(
       (prevState) => ({
         onSaveButtonClick: [...prevState.onSaveButtonClick, newCard],
       }),
-      () => {
-        const { onSaveButtonClick } = this.state;
-        onSaveButtonClick.some((element) => (element.cardTrunfo === true
-          ? this.setState({ hasTrunfo: true })
-          : this.setState({ hasTrunfo: false })));
-      },
     );
     this.setState({ ...stateInicial });
   };
 
+  deleteCard = (name, trunfo) => {
+    const { onSaveButtonClick } = this.state;
+    if (trunfo === true) {
+      const cardNormal = onSaveButtonClick
+        .filter((element) => element.cardTrunfo !== trunfo);
+      this.setState({
+        onSaveButtonClick: [...cardNormal],
+        cardTrunfo: false,
+        hasTrunfo: false,
+      });
+    } else {
+      const card = onSaveButtonClick.filter((element) => element.cardName !== name);
+      this.setState({
+        onSaveButtonClick: [...card],
+      });
+    }
+  };
+
   render() {
-    // const {
-    //   // cardName,
-    //   // cardDescription,
-    //   // cardAttr1,
-    //   // cardAttr2,
-    //   // cardAttr3,
-    //   // cardImage,
-    //   // cardRare,
-    //   // cardTrunfo,
-    // } = this.state;
     const { onSaveButtonClick } = this.state;
     return (
       <div>
@@ -130,14 +133,6 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
-          // cardName={ cardName }
-          // cardImage={ cardImage }
-          // cardDescription={ cardDescription }
-          // cardAttr1={ cardAttr1 }
-          // cardAttr2={ cardAttr2 }
-          // cardAttr3={ cardAttr3 }
-          // cardRare={ cardRare }
-          // cardTrunfo={ cardTrunfo }
           { ...this.state }
           onInputChange={ this.onInputChange }
         />
@@ -153,17 +148,28 @@ class App extends React.Component {
             cardRare,
             cardTrunfo,
           }) => (
-            <Card
-              key={ cardName }
-              cardName={ cardName }
-              cardImage={ cardImage }
-              cardDescription={ cardDescription }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardRare={ cardRare }
-              cardTrunfo={ cardTrunfo }
-            />
+            <section key={ cardName }>
+              <Card
+                key={ cardName }
+                cardName={ cardName }
+                cardImage={ cardImage }
+                cardDescription={ cardDescription }
+                cardAttr1={ cardAttr1 }
+                cardAttr2={ cardAttr2 }
+                cardAttr3={ cardAttr3 }
+                cardRare={ cardRare }
+                cardTrunfo={ cardTrunfo }
+              />
+              <button
+                onClick={ () => this.deleteCard(cardName, cardTrunfo) }
+                data-testid="delete-button"
+                key={ cardName }
+                type="button"
+              >
+                Excluir
+
+              </button>
+            </section>
           ),
         )}
       </div>
