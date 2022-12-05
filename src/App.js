@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './App.css';
 
 const stateInicial = {
   cardName: '',
@@ -10,6 +11,7 @@ const stateInicial = {
   cardAttr3: '0',
   cardImage: '',
   cardRare: '',
+  cardFilter: '',
 };
 
 class App extends React.Component {
@@ -122,22 +124,32 @@ class App extends React.Component {
     }
   };
 
+  handleChange = ({ target }) => {
+    const { value } = target;
+    this.setState({
+      cardFilter: value,
+    });
+  };
+
   render() {
-    const { onSaveButtonClick } = this.state;
+    const { onSaveButtonClick, cardFilter } = this.state;
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-        />
+        <div className="container">
+          <h1>Tryunfo</h1>
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            handleChange={ this.handleChange }
+          />
+          <Card
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+          />
+        </div>
 
-        {onSaveButtonClick.map(
+        {onSaveButtonClick.filter((card) => card.cardName.includes(cardFilter)).map(
           ({
             cardName,
             cardDescription,

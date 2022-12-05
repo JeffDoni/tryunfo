@@ -15,25 +15,34 @@ class Card extends React.Component {
       // hasTrunfo,
     } = this.props;
     return (
-      <div>
-        <p data-testid="name-card">{ cardName }</p>
-        <img src={ cardImage } alt={ cardName } data-testid="image-card" />
-        <p data-testid="description-card">{ cardDescription }</p>
-        <p data-testid="attr1-card">{ cardAttr1 }</p>
-        <p data-testid="attr2-card">{ cardAttr2 }</p>
-        <p data-testid="attr3-card">{ cardAttr3 }</p>
-        <p data-testid="rare-card">
-          { cardRare }
-        </p>
-        {cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
-        {/* <h2>
+      <div className="card containerCard">
+        <img
+          src={ cardImage }
+          alt={ cardName }
+          data-testid="image-card"
+          className="card-img-top"
+        />
+        <div className="card-body">
+          <h5 data-testid="name-card" className="card-title">{ cardName }</h5>
+          <p data-testid="description-card" className="card-text">{ cardDescription }</p>
+        </div>
+        <section className="list-group list-group-flush">
+
+          <p data-testid="attr1-card" className="card-text">{ cardAttr1 }</p>
+          <p data-testid="attr2-card" className="card-text">{ cardAttr2 }</p>
+          <p data-testid="attr3-card" className="card-text">{ cardAttr3 }</p>
+          <p data-testid="rare-card" className="card-text">
+            { cardRare }
+          </p>
+          {cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p> }
+          {/* <h2>
           { hasTrunfo ? (
             <span>Você já tem um Super Trunfo em seu baralho</span>
           ) : (
             <span>Carta comum</span>
           )}
         </h2> */}
-
+        </section>
       </div>
     );
   }

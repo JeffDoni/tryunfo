@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 693px;
+  width: 404px;
+
+
+}
+
+.container {
+  border: 1px solid white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerCard {
+  border: 1px solid black;
+  width: 18rem;
+
+}
