@@ -16,7 +16,6 @@ class Form extends React.Component {
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
-      handleChange,
     } = this.props;
     return (
       <form>
@@ -132,16 +131,8 @@ class Form extends React.Component {
             Salvar
           </button>
         </fieldset>
-        <label htmlFor="cardFilter">
-          <input
-            type="text"
-            name="cardFilter"
-            id="cardFilter"
-            onChange={ handleChange }
-            data-testid="name-filter"
-          />
-        </label>
       </form>
+
     );
   }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Header from './components/Header';
+import Filter from './components/Filter';
 import './App.css';
 
 const stateInicial = {
@@ -135,55 +137,66 @@ class App extends React.Component {
     const { onSaveButtonClick, cardFilter } = this.state;
     return (
       <div>
+        <Header />
         <div className="container">
-          <h1>Tryunfo</h1>
           <Form
             { ...this.state }
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
-            handleChange={ this.handleChange }
           />
           <Card
             { ...this.state }
             onInputChange={ this.onInputChange }
           />
         </div>
+        <Filter
+          handleChange={ this.handleChange }
+        />
+        <div className="containerList">
+          {
+            onSaveButtonClick
+              .filter((card) => card.cardName.includes(cardFilter)
+              || card.cardRare === cardFilter)
+              .map(
+                ({
+                  cardName,
+                  cardDescription,
+                  cardAttr1,
+                  cardAttr2,
+                  cardAttr3,
+                  cardImage,
+                  cardRare,
+                  cardTrunfo,
+                }) => (
+                  <section key={ cardName } className="alinhamento">
 
-        {onSaveButtonClick.filter((card) => card.cardName.includes(cardFilter)).map(
-          ({
-            cardName,
-            cardDescription,
-            cardAttr1,
-            cardAttr2,
-            cardAttr3,
-            cardImage,
-            cardRare,
-            cardTrunfo,
-          }) => (
-            <section key={ cardName }>
-              <Card
-                key={ cardName }
-                cardName={ cardName }
-                cardImage={ cardImage }
-                cardDescription={ cardDescription }
-                cardAttr1={ cardAttr1 }
-                cardAttr2={ cardAttr2 }
-                cardAttr3={ cardAttr3 }
-                cardRare={ cardRare }
-                cardTrunfo={ cardTrunfo }
-              />
-              <button
-                onClick={ () => this.deleteCard(cardName, cardTrunfo) }
-                data-testid="delete-button"
-                key={ cardName }
-                type="button"
-              >
-                Excluir
+                    <Card
+                      key={ cardName }
+                      cardName={ cardName }
+                      cardImage={ cardImage }
+                      cardDescription={ cardDescription }
+                      cardAttr1={ cardAttr1 }
+                      cardAttr2={ cardAttr2 }
+                      cardAttr3={ cardAttr3 }
+                      cardRare={ cardRare }
+                      cardTrunfo={ cardTrunfo }
+                    />
+                    <button
+                      onClick={ () => this.deleteCard(cardName, cardTrunfo) }
+                      data-testid="delete-button"
+                      key={ cardName }
+                      type="button"
+                    >
+                      Excluir
 
-              </button>
-            </section>
-          ),
-        )}
+                    </button>
+
+                  </section>
+                ),
+              )
+          }
+        </div>
+
       </div>
     );
   }
