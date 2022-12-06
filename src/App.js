@@ -19,6 +19,7 @@ const stateInicial = {
 class App extends React.Component {
   state = {
     ...stateInicial,
+    filterTrunfo: false,
     hasTrunfo: false,
     cardTrunfo: false,
     isSaveButtonDisabled: true,
@@ -133,8 +134,14 @@ class App extends React.Component {
     });
   };
 
+  handleFilter = ({ target: { checked } }) => {
+    this.setState({
+      filterTrunfo: checked,
+    });
+  };
+
   render() {
-    const { onSaveButtonClick, cardFilter } = this.state;
+    const { onSaveButtonClick, cardFilter, filterTrunfo } = this.state;
     return (
       <div>
         <Header />
@@ -151,12 +158,15 @@ class App extends React.Component {
         </div>
         <Filter
           handleChange={ this.handleChange }
+          handleFilter={ this.handleFilter }
+          filterTrunfo={ filterTrunfo }
         />
         <div className="containerList">
           {
             onSaveButtonClick
               .filter((card) => card.cardName.includes(cardFilter)
               || card.cardRare === cardFilter)
+              .filter((card) => (filterTrunfo ? card.cardTrunfo : card))
               .map(
                 ({
                   cardName,
