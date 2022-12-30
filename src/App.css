@@ -26,7 +26,7 @@ form {
 
 img {
   height: 270px;
-  width: 308px;
+  width: 300px;
 
 }
 
@@ -49,6 +49,26 @@ textarea {
 
 }
 
+h2 {
+  color: white;
+  margin-top: 100px;
+  text-align: center;
+}
+
+h1 {
+  color: #2fc18c;
+  font-size: 20px;
+  margin-top: 50px;
+  text-align: center;
+
+}
+
+h5 {
+  background-color: black;
+  border-radius: 20px;
+  color: white;
+}
+
 .container {
   background-color: white;
   border-radius: 20px;
@@ -62,14 +82,25 @@ textarea {
 
 .containerList {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .containerCard {
+  align-items: center;
   background: #036b52;
-  border-radius: 9px;
+  border-radius: 20px;
   height: 514.86px;
+  justify-content: center;
   width: 338.7px;
+
+}
+
+.containerCard img {
+  background-color: white;
+  border-radius: 20px;
+  justify-self: center;
+
 
 }
 
@@ -79,9 +110,40 @@ textarea {
 }
 
 .filter {
+  align-items: center;
+  background-color: #036b52;
   border-radius: 10px;
+  display: flex;
   height: 75px;
-  margin-left: 90px;
+  justify-content: space-around;
+  margin-bottom: 50px;
   width: 1124px;
 
+
+}
+
+.att {
+  align-items: center;
+  background-color: #052727;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  width: 100%;
+
+
+}
+
+
+.app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imgStyle {
+  border-radius: 0 30px;
+  margin-top: 1rem;
+  width: 20rem;
 }

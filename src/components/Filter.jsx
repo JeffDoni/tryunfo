@@ -5,12 +5,14 @@ class Filter extends React.Component {
   render() {
     const { handleChange, handleFilter, filterTrunfo } = this.props;
     return (
-      <div>
-        <label htmlFor="cardFilter" className="filter">
+      <div className="filter">
+        <label htmlFor="cardFilter">
+          Filtros de busca:
           <input
             type="text"
             name="cardFilter"
             id="cardFilter"
+            placeholder="Nome da carta"
             onChange={ handleChange }
             disabled={ filterTrunfo }
             data-testid="name-filter"
@@ -23,6 +25,7 @@ class Filter extends React.Component {
             data-testid="rare-filter"
             onChange={ handleChange }
             disabled={ filterTrunfo }
+            className="form-select"
           >
             <option value="">todas</option>
             <option value="normal">normal</option>

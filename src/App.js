@@ -143,7 +143,7 @@ class App extends React.Component {
   render() {
     const { onSaveButtonClick, cardFilter, filterTrunfo } = this.state;
     return (
-      <div>
+      <div className="app">
         <Header />
         <div className="container">
           <Form
@@ -151,11 +151,15 @@ class App extends React.Component {
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
-          <Card
-            { ...this.state }
-            onInputChange={ this.onInputChange }
-          />
+          <div>
+            <h1>PRÉ-VISUALIZAÇÃO</h1>
+            <Card
+              { ...this.state }
+              onInputChange={ this.onInputChange }
+            />
+          </div>
         </div>
+        <h2>TODAS AS CARTAS</h2>
         <Filter
           handleChange={ this.handleChange }
           handleFilter={ this.handleFilter }

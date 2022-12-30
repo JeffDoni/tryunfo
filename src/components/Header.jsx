@@ -1,10 +1,11 @@
 import React from 'react';
+import img from './logo_tryunfo.png';
 
 class Header extends React.Component {
   render() {
     return (
       <header>
-        <h1>Tryunfo</h1>
+        <img src={ img } alt="logo" />
       </header>
     );
   }

@@ -20,17 +20,28 @@ class Card extends React.Component {
           src={ cardImage }
           alt={ cardName }
           data-testid="image-card"
-          className="card-img-top"
+          className="card-img-top imgStyle"
         />
         <div className="card-body">
           <h5 data-testid="name-card" className="card-title">{ cardName }</h5>
           <p data-testid="description-card" className="card-text">{ cardDescription }</p>
         </div>
-        <section className="list-group list-group-flush">
+        <div className="list-group list-group-flush att">
 
-          <p data-testid="attr1-card" className="card-text">{ cardAttr1 }</p>
-          <p data-testid="attr2-card" className="card-text">{ cardAttr2 }</p>
-          <p data-testid="attr3-card" className="card-text">{ cardAttr3 }</p>
+          <p data-testid="attr1-card" className="card-text">
+            {' '}
+            <span> SIZE.................................... </span>
+            { cardAttr1 }
+
+          </p>
+          <p data-testid="attr2-card" className="card-text">
+            <span>SPEED.................................... </span>
+            { cardAttr2 }
+          </p>
+          <p data-testid="attr3-card" className="card-text">
+            <span>FORCE.................................... </span>
+            { cardAttr3 }
+          </p>
           <p data-testid="rare-card" className="card-text">
             { cardRare }
           </p>
@@ -42,7 +53,7 @@ class Card extends React.Component {
             <span>Carta comum</span>
           )}
         </h2> */}
-        </section>
+        </div>
       </div>
     );
   }

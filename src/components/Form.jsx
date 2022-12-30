@@ -19,6 +19,7 @@ class Form extends React.Component {
     } = this.props;
     return (
       <form>
+        <h1>ADICIONE UMA NOVA CARTA</h1>
         <fieldset>
           <label htmlFor="cardName">
             Nome
@@ -110,7 +111,7 @@ class Form extends React.Component {
           </label>
           {hasTrunfo ? (<p>Você já tem um Super Trunfo em seu baralho</p>)
             : (
-              <label htmlFor="cardTrunfo">
+              <label htmlFor="cardTrunfo" className="form-check-label">
                 Super Trunfo:
                 <input
                   type="checkbox"
@@ -119,6 +120,7 @@ class Form extends React.Component {
                   data-testid="trunfo-input"
                   checked={ cardTrunfo }
                   onChange={ onInputChange }
+                  className="form-check-input"
                 />
               </label>
             )}
